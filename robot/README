@@ -35,3 +35,16 @@ Launching step:
 
 video link: https://drive.google.com/file/d/1nYuAtJIM6xrzYTsjO3tzrlmSrykZcXrH/view?usp=sharing
 run 
+
+*****************************************************************************************************
+To launch camera files: 
+
+- launch gazebo_cam.launch 
+
+	this file launches gazebo, camera sensor, controller and 2 python scripts
+
+	controller is to add movement to the scene 
+	python script "control.py" to send messages to joints 
+	python script "camera.py' to save images to folder  "src/robot/images/"
+
+another video is added "ros_camera_test.mp4"
