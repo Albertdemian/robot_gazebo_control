@@ -16,9 +16,12 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 # OpenCV2 for saving an image
 import cv2
+import time
 
 # Instantiate CvBridge
 bridge = CvBridge()
+
+t0 =int(time.time())
 
 def image_callback(msg):
     print("Received an image!")
@@ -29,12 +32,23 @@ def image_callback(msg):
         print(e)
     else:
         # Save your OpenCV2 image as a jpeg 
-        cv2.imwrite('camera_image.jpeg', cv2_img)
+        # if t < 0:
+        t = str(int(time.time())-t0+1)
+        #print(t)
+        # else:
+        if int(t) <= 20:
+            cv2.imwrite('/home/albertdemian/robot_1/src/robot/images/camera_image'+t+'.jpeg', cv2_img)
+        else:
+            pass
+        
+        # else:
+        #     cv2.imwrite('camera_image.jpeg', cv2_img)
 
 def main():
+    
     rospy.init_node('image_listener')
     # Define your image topic
-    image_topic = "/cameras/left_hand_camera/image"
+    image_topic = "/robot/camera1/image_raw"
     # Set up your subscriber and define its callback
     rospy.Subscriber(image_topic, Image, image_callback)
     # Spin until ctrl + c

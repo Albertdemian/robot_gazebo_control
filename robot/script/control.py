@@ -15,12 +15,14 @@ def talker():
     rospy.init_node('talker', anonymous=True)
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
-        while time.time() < t_end:
+#        while time.time() < t_end:
             t = time.time()
-            angle1 = math.sin(t)/10
-            angle2 = math.cos(t)/10
-            angle3 = math.sin(t)/10
-            angle4 = math.cos(t)/10
+            angle1 = math.sin(t)*-1/5
+            angle2 = math.cos(t)*-1/5
+            #angle2 = 0
+            angle3 = math.sin(t)/5
+            angle4 = math.cos(t)/5
+            #angle4 = 0
             hello_str = "hello world %s" % rospy.get_time()
             rospy.loginfo(hello_str)
             pub1.publish(angle1)
