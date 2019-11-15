@@ -13,7 +13,7 @@ def talker():
     pub3 = rospy.Publisher('/rrbot/joint3_position_controller/command', Float64, queue_size=10)
     pub4 = rospy.Publisher('/rrbot/joint4_position_controller/command', Float64, queue_size=10)
     rospy.init_node('talker', anonymous=True)
-    rate = rospy.Rate(10) # 10hz
+    rate = rospy.Rate(50) # 10hz
     while not rospy.is_shutdown():
 #        while time.time() < t_end:
             t = time.time()
@@ -23,7 +23,7 @@ def talker():
             angle3 = math.sin(t)/5
             angle4 = math.cos(t)/5
             #angle4 = 0
-            hello_str = "hello world %s" % rospy.get_time()
+            hello_str = "hello world  %f" % angle1
             rospy.loginfo(hello_str)
             pub1.publish(angle1)
             pub2.publish(angle2)
