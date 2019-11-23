@@ -6,4 +6,7 @@ python:
 
 script: 
   - echo "hello world"
+  - source devel/setup.bash
   - python3 testing/tests/joint_ctrl_fn_test.py
+  - roslaunch robot gazebo_cam.launch
+  - python testing/tests/publisher_test.py 
