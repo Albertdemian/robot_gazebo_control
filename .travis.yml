@@ -6,3 +6,4 @@ python:
 
 script: 
   - echo "hello world"
+  - python3 testing/tests/joint_ctrl_fn_test.py
