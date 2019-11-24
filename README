@@ -1,20 +1,2 @@
-three tests are performed 
+[![Build Status](https://travis-ci.com/Albertdemian/robot_gazebo_control.svg?branch=master)](https://travis-ci.com/Albertdemian/robot_gazebo_control)
 
-first test
-unit test "joint_ctrl_fn_test.py" it tests the functions that controller uses to calculate angles
-
-the test runs to check if at any instance the controller output would exceed joints limits
-
-test succeeded. 
-
-second test 
-
-unit test "publisher_test.py"
-it tests the controller publisher if it actually publishes to joint control topics 
-
-
-third test was suppsed to be integration 
-the goal was to write two subscribers one for joint_states_commands and the other for ros/joinstates
-
-the problem I couldn't retrieve readings into variables 
-the goal of test is to check if the controller function actually moves the robot in gazebo. 
