@@ -43,8 +43,10 @@ before_script:
 
 
 script: 
+  - source /opt/ros/kinetic/setup.bash
+  - cd ~/catkin_ws
   - echo "hello world"
   - source devel/setup.bash
-  - python3 ~/robot_1/src/testing/tests/joint_ctrl_fn_test.py
+  - python ~/robot_1/src/testing/tests/joint_ctrl_fn_test.py
   - roslaunch robot gazebo_cam.launch
-  - python3 ~/robot_1/src/testing/tests/publisher_test.py 
+  - python ~/robot_1/src/testing/tests/publisher_test.py 
