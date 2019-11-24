@@ -45,6 +45,6 @@ before_script:
 script: 
   - echo "hello world"
   - source devel/setup.bash
-  - python3 testing/tests/joint_ctrl_fn_test.py
+  - python3 ~/robot_1/src/testing/tests/joint_ctrl_fn_test.py
   - roslaunch robot gazebo_cam.launch
-  - python testing/tests/publisher_test.py 
+  - python3 ~/robot_1/src/testing/tests/publisher_test.py 
