@@ -17,6 +17,7 @@ before_install:
   - echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
   - source ~/.bashrc
   - sudo apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
+  - pip install catkin_pkg
  
 install:
   - mkdir -p ~/robot_1/src
