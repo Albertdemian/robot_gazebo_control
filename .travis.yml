@@ -44,7 +44,7 @@ before_script:
 
 script: 
   - source /opt/ros/kinetic/setup.bash
-  - cd ~/catkin_ws
+  - cd ~/robot_1
   - echo "hello world"
   - source devel/setup.bash
   - catkin_make run_tests && catkin_test_results
