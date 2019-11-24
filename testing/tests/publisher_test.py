@@ -18,8 +18,8 @@ class publishermsg_test(unittest.TestCase):
         rospy.Subscriber('/rrbot/joint1_position_controller/command',Float64, self.callback)
 
         counter = 0
-        while not rospy.is_shutdown() and counter < 2 and (not self.publisher_working):
-            sleep(2)
+        while not rospy.is_shutdown() and counter < 5 and (not self.publisher_working):
+            sleep(5)
             counter +=1 
 
         self.assertTrue(self.publisher_working)

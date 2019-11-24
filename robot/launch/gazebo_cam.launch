@@ -26,4 +26,6 @@
  <node name="talker" pkg="robot" type="control.py" />
  <node name="image_listener" pkg="robot" type="camera.py" />	
 
+<test test-name="unit_publisher" pkg="testing" type="publisher_test.py" />
+
 </launch>

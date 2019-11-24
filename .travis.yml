@@ -47,6 +47,4 @@ script:
   - cd ~/catkin_ws
   - echo "hello world"
   - source devel/setup.bash
-  - python ~/robot_1/src/testing/tests/joint_ctrl_fn_test.py
-  - roslaunch robot gazebo_cam.launch
-  - python ~/robot_1/src/testing/tests/publisher_test.py 
+  - catkin_make run_tests && catkin_test_results
