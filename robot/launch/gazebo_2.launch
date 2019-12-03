@@ -25,5 +25,6 @@
 
  
 <test test-name="unit_publisher" pkg="testing" type="publisher_test.py" />
+<test test-name="unit_publisher" pkg="testing" type="integration.py" />
 
 </launch>
