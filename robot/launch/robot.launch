@@ -3,7 +3,7 @@
 
 <launch>
 
-  <arg name="model" default="$(find robot)/urdf/myfirst.urdf"/>
+  <arg name="model" default="$(find robot)/urdf/myfirst.xacro"/>
   <arg name="gui" default="true" />
   
   

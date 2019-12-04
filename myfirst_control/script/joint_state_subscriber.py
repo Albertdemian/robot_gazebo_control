@@ -16,7 +16,7 @@ def listener():
     # run simultaneously.
     rospy.init_node('joint_state_sub', anonymous=True)
 
-    rospy.Subscriber("/rrbot/joint_states", JointState, callback)
+    rospy.Subscriber("/continuum/joint_states", JointState, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()

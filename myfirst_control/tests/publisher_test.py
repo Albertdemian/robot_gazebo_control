@@ -15,7 +15,7 @@ class publishermsg_test(unittest.TestCase):
     
     def test_publisher(self):
         rospy.init_node('publisher_test')
-        rospy.Subscriber('/rrbot/joint1_position_controller/command',Float64, self.callback)
+        rospy.Subscriber('/continuum/joint1_position_controller/command',Float64, self.callback)
 
         counter = 0
         while not rospy.is_shutdown() and counter < 5 and (not self.publisher_working):

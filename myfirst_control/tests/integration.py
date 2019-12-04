@@ -30,14 +30,14 @@ class integration_test(unittest.TestCase):
 
         rospy.init_node('joint_state_sub', anonymous=True)
     
-        pub1 = rospy.Publisher('/rrbot/joint1_position_controller/command', Float64, queue_size=10)
+        pub1 = rospy.Publisher('/rrbcontinuumot/joint1_position_controller/command', Float64, queue_size=10)
         
         while time.time() < t_end:
             t = time.time()
             pub1.publish(self.angle1)
 
         
-        rospy.Subscriber("/rrbot/joint_states", JointState, self.callback_msg)
+        rospy.Subscriber("/continuum/joint_states", JointState, self.callback_msg)
         sleep(1)
 
         

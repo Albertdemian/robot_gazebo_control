@@ -4,27 +4,27 @@
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
 	</include>
 
-	<param name="robot_description" textfile="$(find robot)/urdf/myfirst.urdf"/>
+	<param name="robot_description" textfile="$(find robot)/urdf/myfirst.xacro"/>
 	
 	<node name="spawn_robot" pkg="gazebo_ros" type="spawn_model" respawn="false"
 		args="-urdf -model myoboat -param robot_description -z 1">
 	</node>
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find robot)/myfirst_control/config/mfcontrol.yaml" command="load"/>
+  <rosparam file="$(find myfirst_control)/config/mfcontrol.yaml" command="load"/>
 
   <!-- load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="/rrbot" args="joint1_position_controller joint2_position_controller joint3_position_controller joint4_position_controller joint_state_controller"/>
+    output="screen" ns="/continuum" args="joint1_position_controller joint2_position_controller joint3_position_controller joint4_position_controller joint_state_controller"/>
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
     respawn="false" output="screen">
-    <remap from="/joint_states" to="/rrbot/joint_states" />
+    <remap from="/joint_states" to="/continuum/joint_states" />
   </node>
 
  
-<test test-name="unit_publisher" pkg="testing" type="publisher_test.py" />
-<test test-name="unit_publisher" pkg="testing" type="integration.py" />
+<test test-name="unit_publisher" pkg="myfirst_control" type="publisher_test.py" />
+<test test-name="unit_publisher" pkg="myfirst_control" type="integration.py" />
 
 </launch>

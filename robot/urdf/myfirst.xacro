@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
-<robot name="myfirst">
-   
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="myfirst">
+  
+  <xacro:include filename="$(find robot)/urdf/control.gazebo" />
+
   <link name="base_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -177,28 +180,7 @@
     </inertial>
   </link>
 
-  <link name="camera_link">
-    
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0.25"/>
-      <geometry>
-        <box size="0.5 0.5 0.5"/>
-      </geometry>
-       <material name="yellow">
-         <color rgba="1 1 0 1"/>
-       </material>
-    </visual>
-    <inertial>
-      <mass value="0.1"/>
-      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.042" iyz="0.0" izz="0.035"/>
-    </inertial>
-  </link>
-
-  <joint name="fix_3" type="fixed">
-	<origin xyz="5.25 0 1.25" rpy="0 0 0 "/>
-	<parent link= "link_4"/>
-	<child link = "camera_link"/>
-  </joint>
+  
 	
 
   <joint name="rev_4" type="revolute">
@@ -209,54 +191,59 @@
 	<limit effort="30" velocity="1.0" lower="-0.45" upper="0.45" />
   </joint>
 
+  
+
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/rrbot</robotNamespace>
+      <robotNamespace>/continuum</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
     </plugin>
   </gazebo> 
+  
+  <gazebo reference="camera_link">
+      <sensor type="camera" name="camera1">
+        <update_rate>30.0</update_rate>
+        <camera name="head">
+          <horizontal_fov>1.3962634</horizontal_fov>
+          <image>
+            <width>600</width>
+            <height>600</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <!-- Noise is sampled independently per pixel on each frame.
+                 That pixel's noise value is added to each of its color
+                 channels, which at that point lie in the range [0,1]. -->
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+  
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>0.0</updateRate>
+          <cameraName>robot/camera1</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>camera_link</frameName>
+          <hackBaseline>0.07</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+      </sensor>
+    </gazebo>
+   
+ 
 
-
-   <gazebo reference="camera_link">
-    <sensor type="camera" name="camera1">
-      <update_rate>30.0</update_rate>
-      <camera name="head">
-        <horizontal_fov>1.3962634</horizontal_fov>
-        <image>
-          <width>600</width>
-          <height>600</height>
-          <format>R8G8B8</format>
-        </image>
-        <clip>
-          <near>0.02</near>
-          <far>300</far>
-        </clip>
-        <noise>
-          <type>gaussian</type>
-          <!-- Noise is sampled independently per pixel on each frame.
-               That pixel's noise value is added to each of its color
-               channels, which at that point lie in the range [0,1]. -->
-          <mean>0.0</mean>
-          <stddev>0.007</stddev>
-        </noise>
-      </camera>
-      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-        <alwaysOn>true</alwaysOn>
-        <updateRate>0.0</updateRate>
-        <cameraName>robot/camera1</cameraName>
-        <imageTopicName>image_raw</imageTopicName>
-        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>camera_link</frameName>
-        <hackBaseline>0.07</hackBaseline>
-        <distortionK1>0.0</distortionK1>
-        <distortionK2>0.0</distortionK2>
-        <distortionK3>0.0</distortionK3>
-        <distortionT1>0.0</distortionT1>
-        <distortionT2>0.0</distortionT2>
-      </plugin>
-    </sensor>
-  </gazebo>
-
-  <transmission name="base_swing_1">
+ <transmission name="base_swing_1">
     <type>transmission_interface/SimpleTransmission</type>
     <actuator name="act1_1">
       <mechanicalReduction>1</mechanicalReduction>
@@ -296,6 +283,28 @@
     </joint>
   </transmission>
 
+  <link name="camera_link">
+    
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.25"/>
+      <geometry>
+        <box size="0.5 0.5 0.5"/>
+      </geometry>
+       <material name="yellow">
+         <color rgba="1 1 0 1"/>
+       </material>
+    </visual>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.042" iyz="0.0" izz="0.035"/>
+    </inertial>
+  </link>
+
+  <joint name="fix_3" type="fixed">
+	<origin xyz="5.25 0 1.25" rpy="0 0 0 "/>
+	<parent link= "link_4"/>
+	<child link = "camera_link"/>
+  </joint>
 
 </robot>
 
